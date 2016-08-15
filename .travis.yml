@@ -1,0 +1,35 @@
+language: c
+
+os:
+  - linux
+  - osx
+
+compiler:
+  - clang
+  - gcc
+
+script: make all test
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
+
+matrix:
+  exclude:
+    - os: linux
+      compiler: clang
+    - os: osx
+      compiler: gcc
+
+env:
+  global:
+    - secure: "jquv/X3YDBI95u0Jhgtt+eemndIh+AH6mYFf1ZF5+kBHHjv5URoj/NGPN16tKg6i9CSlGm04qKJnnKpn99RG8/LQV50O+ef/eDhSLW94gMtP9xAM+5MyjQLGr7OtizGK5xBP5/ZQ5WrvuNBYZ+wd9QCSHqrEgS41RVjqcRFhQYyVATtpKmS1QB1S1SYj3WngX+F7djWIDMxAoBZ8VLs+qlHE7ELwLgH8VD6Q1yWxb4DcBBBWixO12wNkYdmoC3l6BI1QQsuY6g6SFMEQ+TH5g6BhElLpRR9J8Y+qJD6qp4zxlZHebfJRz7pFgjhmqmwzmkuibHlcpEDxhuxlJrYYwQ3+c2zaOE+i3PVd+Q01C0sevKHLZPYypWvKvK+6Hj+jGv7fruFif+2uERc20M4nzVW/cp9VmWEBJt6HDpg7W2/EtQkMW7x3uxJszkOt/dCWlPBDTCuz8EIfLdWsCr02IW9hJZvZVRH4dWp6Fg3mZTHlDJuCSMgile0dTx+vWwUaLPLrBCETdoHNJ0q3zwAXrYXxdHkN7n0YNdNy8+1mh10yWbKNAjXgB4q3ULpr4d3197UeXyGHPblFEzlPXYr0JMrBzFcgHvVFoZb3NFvuGj8OmNQTmfEzgGiHYGZMZVT7M6noA/rtI/2mFuU2FWSHwYhaKObeGfBzLcuxTLy4pfM="
+
+addons:
+  coverity_scan:
+    project:
+      name: "amijunk/junk001"
+      description: "test"
+    notification_email: amijunk7@gmail.com
+    build_command_prepend: "make clean"
+    build_command: "make"
+    branch_pattern: master
